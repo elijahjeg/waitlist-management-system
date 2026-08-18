@@ -1,0 +1,10 @@
+venv/
+build_venv/
+__pycache__/
+*.pyc
+instance/
+.DS_Store
+*.json
+!package*.json
+build/
+dist/

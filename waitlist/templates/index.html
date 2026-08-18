@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Impact Childcare — Waitlist Manager</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-stone-50 text-stone-800">
+
+<div class="max-w-5xl mx-auto px-6 py-8">
+
+  <header class="flex flex-col gap-4 mb-8">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-teal-700 flex items-center justify-center text-white">
+          <i data-lucide="baby" style="width:22px;height:22px;"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-stone-800 tracking-tight">Impact Childcare</h1>
+          <p class="text-sm text-stone-500 -mt-0.5">Waitlist Manager — local draft</p>
+        </div>
+      </div>
+      <nav class="flex gap-1 bg-stone-200 p-1 rounded-xl">
+        <button class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium" data-tab="openings" onclick="setTab('openings')">
+          <i data-lucide="calendar-days" style="width:15px;height:15px;"></i> Openings
+        </button>
+        <button class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium" data-tab="waitlist" onclick="setTab('waitlist')">
+          <i data-lucide="users" style="width:15px;height:15px;"></i> Waitlist / Call list
+        </button>
+        <button class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium" data-tab="archive" onclick="setTab('archive')">
+          <i data-lucide="archive" style="width:15px;height:15px;"></i> Archive
+        </button>
+        <button class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium" data-tab="settings" onclick="setTab('settings')">
+          <i data-lucide="settings" style="width:15px;height:15px;"></i> Settings
+        </button>
+      </nav>
+    </div>
+    <div id="toast" class="hidden text-sm rounded-lg px-4 py-2.5 border"></div>
+  </header>
+
+  <div class="tab-panel" data-tab="openings" id="panel-openings"></div>
+  <div class="tab-panel hidden" data-tab="waitlist" id="panel-waitlist"></div>
+  <div class="tab-panel hidden" data-tab="archive" id="panel-archive"></div>
+  <div class="tab-panel hidden" data-tab="settings" id="panel-settings"></div>
+
+</div>
+
+<div id="modal-root"></div>
+<div id="confirm-root"></div>
+
+<input type="file" id="roster-file-input" accept=".csv" class="hidden" />
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script>document.addEventListener("DOMContentLoaded", init);</script>
+</body>
+</html>
