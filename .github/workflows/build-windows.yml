@@ -1,0 +1,34 @@
+name: Build Windows exe
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install "pyinstaller>=6.15.0"
+
+      - name: Write service account key
+        shell: bash
+        run: echo "$GOOGLE_SERVICE_ACCOUNT_JSON" > fast-audio-303101-6ae072de98ed.json
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+
+      - name: Build with PyInstaller
+        run: pyinstaller --clean --noconfirm waitlist.spec
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ImpactChildcareWaitlist-windows
+          path: dist/ImpactChildcareWaitlist
